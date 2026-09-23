@@ -8,6 +8,9 @@ design/
 # Source photos. Only the processed crop in src/assets is committed.
 images/
 
+# Rendered brand images; regenerate with `npm run build && npm run brand`.
+brand/export/
+
 # Local tooling and agent config (machine-specific)
 .mcp.json
 .claude/

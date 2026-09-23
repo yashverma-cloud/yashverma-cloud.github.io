@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+  LinkedIn Page cover, 1512×256 (LinkedIn Help, "Image specifications for your LinkedIn
+  Pages", checked Sep 2026; older guides still say 1128×191). The Page logo overlaps the
+  bottom-left and mobile trims the sides, so the content is centred with wide margins.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>LinkedIn Page cover</title>
+    <link rel="stylesheet" href="/brand/brand.css" />
+    <style>
+      :root {
+        --w: 1512px;
+        --h: 256px;
+      }
+
+      .copy {
+        position: absolute;
+        left: 340px;
+        top: 0;
+        bottom: 0;
+        width: 520px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .headline {
+        font-size: 36px;
+      }
+
+      .where {
+        margin-top: 12px;
+        font-size: 19px;
+        font-weight: 600;
+      }
+
+      .cluster {
+        position: absolute;
+        left: 900px;
+        top: 50%;
+        width: 380px;
+        transform: translateY(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="copy">
+      <p class="headline">I keep production Kubernetes running when nodes die.</p>
+      <p class="where muted">yashverma-cloud.github.io</p>
+    </div>
+    <div class="cluster" data-cluster></div>
+
+    <div class="guide safe" style="left: 280px; top: 32px; width: 1052px; height: 192px"></div>
+    <div class="guide covered" style="left: 0; bottom: 0; width: 260px; height: 110px"></div>
+
+    <script type="module" src="/brand/brand.js"></script>
+  </body>
+</html>
