@@ -50,7 +50,13 @@ const description = [entry.data.figure, entry.data.result]
   .concat(`. ${entry.data.mechanism}.`);
 ---
 
-<Base title={`${entry.data.title} — ${SITE.name}`} description={description}>
+<Base
+  title={`${entry.data.title} — ${SITE.name}`}
+  description={description}
+  ogImage={`/og/work/${entry.id}.png`}
+  ogImageAlt={`Case study by ${SITE.name}: ${entry.data.title}.`}
+  ogType="article"
+>
   <article class="section">
     <div class="wrap">
       <p class="micro back"><a href="/#work">← Work</a></p>
