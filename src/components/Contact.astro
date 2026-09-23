@@ -1,0 +1,153 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import portrait from '../assets/yash.jpg';
+import { EMAIL_PARTS, SITE } from '../consts';
+
+/**
+ * Contact — design/notes.md §5.7. LinkedIn is the one filled element on the site.
+ * The email address is assembled in the browser and never appears as a raw mailto:
+ * in the HTML (CLAUDE.md). No phone number, no resume link.
+ *
+ * No "what I'm looking for" line. It was agreed in the Phase 2 review and then declined by
+ * Yash in the Phase 4 review — his call, and it is not coming back without him asking.
+ *
+ * The portrait is 56px, square, a 1px --rule hairline, no ring and no glow — v1's glowing
+ * circle is in design/notes.md §1 as a thing not to repeat. `alt` is empty on purpose: the
+ * name sits directly beside it, so a description would be announced twice.
+ */
+const links = (await getCollection('links')).sort((a, b) => a.data.order - b.data.order);
+const primary = links.find((l) => l.data.kind === 'primary');
+const socials = links.filter((l) => l.data.kind === 'social');
+---
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Work with me</h2>
+    </div>
+
+    <div class="who">
+      <Image
+        class="portrait"
+        src={portrait}
+        alt=""
+        width={56}
+        height={56}
+        densities={[1, 2, 3]}
+      />
+      <div>
+        <p class="name">{SITE.name}</p>
+        <p class="micro">{SITE.location}</p>
+      </div>
+    </div>
+
+    <p class="prose intro">
+      LinkedIn is the fastest way to reach me. If you would rather email, the address
+      copies to your clipboard with one click.
+    </p>
+
+    <div class="actions">
+      {
+        primary && (
+          <a class="btn btn-primary" href={primary.data.url} rel="me">
+            Message me on LinkedIn
+          </a>
+        )
+      }
+      <button class="btn" type="button" id="copy-email" data-idle="Copy email">
+        Copy email
+      </button>
+      <span class="visually-hidden" role="status" id="copy-status"></span>
+    </div>
+
+    <ul class="socials micro">
+      {
+        socials.map((link) => (
+          <li>
+            <a href={link.data.url} rel="me">
+              {link.data.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script is:inline define:vars={{ parts: [...EMAIL_PARTS] }}>
+  (function () {
+    var btn = document.getElementById('copy-email');
+    var status = document.getElementById('copy-status');
+    if (!btn) return;
+    var address = parts[0] + String.fromCharCode(64) + parts[1];
+
+    btn.addEventListener('click', function () {
+      var done = function (ok) {
+        btn.textContent = ok ? 'Copied' : address;
+        if (status) status.textContent = ok ? 'Email address copied.' : address;
+        window.setTimeout(function () {
+          btn.textContent = btn.dataset.idle || 'Copy email';
+        }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(address).then(
+          function () { done(true); },
+          function () { done(false); },
+        );
+      } else {
+        done(false);
+      }
+    });
+  })();
+</script>
+
+<style>
+  .who {
+    display: flex;
+    align-items: center;
+    gap: var(--s-4);
+  }
+
+  .portrait {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border: 1px solid var(--rule);
+    object-fit: cover;
+  }
+
+  .name {
+    font-size: var(--fs-display-m);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .intro {
+    margin-top: var(--s-4);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+  }
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-4);
+    list-style: none;
+    padding: 0;
+    margin-top: var(--s-12);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--rule-faint);
+  }
+
+  @media (max-width: 30rem) {
+    .actions .btn {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+# Exactly the public links listed in CLAUDE.md. No phone number, no resume link.
+# Email is deliberately absent: it is assembled in JS behind a copy button, never a
+# raw mailto: in the HTML.
+
+- id: linkedin
+  label: 'LinkedIn'
+  url: 'https://www.linkedin.com/in/yashcloud/'
+  kind: primary
+  order: 1
+
+- id: github
+  label: 'GitHub'
+  url: 'https://github.com/yashverma-cloud'
+  kind: social
+  order: 2
+
+- id: instagram
+  label: 'Instagram'
+  url: 'https://www.instagram.com/yashverma_cloud/'
+  kind: social
+  order: 3
+
+- id: facebook-page
+  label: 'Facebook'
+  url: 'https://www.facebook.com/profile.php?id=61593973846731'
+  kind: social
+  order: 4
+
+- id: linkedin-page
+  label: 'LinkedIn page'
+  url: 'https://www.linkedin.com/company/145197666/'
+  kind: social
+  order: 5

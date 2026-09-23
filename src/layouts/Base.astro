@@ -1,0 +1,118 @@
+---
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { SITE, SAME_AS, PREVIEW_NOINDEX } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Redirect stubs and the like stay out of the index and out of analytics. */
+  noindex?: boolean;
+}
+
+const {
+  title = SITE.title,
+  description = SITE.description,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+
+// PREVIEW_NOINDEX is a temporary switch for review deploys — see consts.ts.
+const blockIndexing = noindex || PREVIEW_NOINDEX;
+
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  jobTitle: SITE.jobTitle,
+  url: SITE.url,
+  sameAs: [...SAME_AS],
+  worksFor: { '@type': 'Organization', name: SITE.employer },
+  alumniOf: { '@type': 'Organization', name: 'Treebo Hospitality Ventures' },
+  homeLocation: { '@type': 'Place', name: 'Jaipur, Rajasthan, India' },
+  knowsAbout: [
+    'Amazon Web Services',
+    'Kubernetes',
+    'Terraform',
+    'Site reliability engineering',
+    'Observability',
+    'CI/CD',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#15345C" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {blockIndexing && <meta name="robots" content="noindex, nofollow" />}
+
+    <link
+      rel="preload"
+      href="/fonts/overpass-latin-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {/* TODO: og:image and twitter:image are generated at build time in Phase 5. */}
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(personLd)}
+      is:inline
+    />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <slot />
+    </main>
+    <SiteFooter />
+
+    {
+      !blockIndexing && (
+        <script is:inline define:vars={{ id: SITE.analyticsId }}>
+          // Loaded after `load` so it never competes with rendering (CLAUDE.md).
+          window.addEventListener('load', function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', id);
+          });
+        </script>
+      )
+    }
+  </body>
+</html>

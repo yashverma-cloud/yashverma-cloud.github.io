@@ -1,0 +1,87 @@
+---
+// Thin sticky bar, 52px (design/notes.md §5.1). Sentence case, no ALL-CAPS.
+// "Writing" joins this nav when the first post ships.
+//
+// `narrow` marks the items that survive at phone widths. Work stays because it is the
+// route to the proof, and phones are where most of the site's traffic lands — hiding it
+// there optimised the bar for tidiness over the page's actual job.
+const nav = [
+  { label: 'Work', href: '/#work', narrow: true },
+  { label: 'Experience', href: '/#experience', narrow: false },
+  { label: 'Contact', href: '/#contact', narrow: true },
+];
+---
+
+<header class="bar">
+  <div class="wrap bar-inner">
+    <a class="wordmark" href="/">Yash Verma</a>
+    <nav aria-label="Sections">
+      <ul>
+        {
+          nav.map((item) => (
+            <li class:list={{ wide: !item.narrow }}>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: var(--blueprint);
+    border-bottom: 1px solid var(--rule-faint);
+  }
+
+  .bar-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+
+  .wordmark {
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  nav ul {
+    display: flex;
+    gap: var(--s-6);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav a {
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    letter-spacing: var(--tr-micro);
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--line);
+  }
+
+  /* Phones keep Work and Contact; only Experience drops, which is what made the bar
+     tight. Verified to fit at 390px and at 360px. */
+  @media (max-width: 34rem) {
+    nav ul {
+      gap: var(--s-4);
+    }
+
+    nav li.wide {
+      display: none;
+    }
+  }
+</style>
