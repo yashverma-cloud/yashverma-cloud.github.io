@@ -29,6 +29,7 @@ async function fill() {
         el.remove();
       } else if (el.dataset.field === 'diagram') {
         el.innerHTML = value === 'cluster' ? cluster : await text(`/brand/${value}`);
+        if (value === 'cluster') el.dataset.kind = 'cluster';
       } else {
         el.textContent = value;
       }

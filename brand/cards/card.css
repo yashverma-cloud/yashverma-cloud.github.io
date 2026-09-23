@@ -1,7 +1,7 @@
 /*
  * LinkedIn post cards, 1080×1350 (4:5, the tallest ratio the feed shows uncropped).
  * The feed shows them at roughly 390–550px wide, a third to a half of this size, so no
- * text here is set smaller than 30px.
+ * text here is set smaller than 36px — the same floor the LinkedIn post routine uses.
  */
 :root {
   --w: 1080px;
@@ -21,8 +21,8 @@
 
 .label-ruled {
   align-self: flex-start;
-  min-width: 280px;
-  font-size: 30px;
+  min-width: 300px;
+  font-size: 36px;
   margin-bottom: 56px;
 }
 
@@ -31,16 +31,16 @@
 }
 
 .caption {
-  font-size: 32px;
-  line-height: 1.45;
+  font-size: 36px;
+  line-height: 1.4;
   color: var(--muted);
   text-wrap: pretty;
 }
 
 .titleblock .who {
-  font-size: 34px;
+  font-size: 38px;
 }
 
 .titleblock .where {
-  font-size: 28px;
+  font-size: 36px;
 }

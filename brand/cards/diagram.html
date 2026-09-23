@@ -19,6 +19,17 @@
       .figure > div {
         width: 100%;
       }
+
+      /* The cluster draws at ~1.9× here, so its 12-unit labels would land near 23px.
+         19 units lands them at the cards' 36px floor; the ingress label is lifted so the
+         larger text clears its tile. */
+      [data-kind='cluster'] svg text {
+        font-size: 19px;
+      }
+
+      [data-kind='cluster'] svg text:first-of-type {
+        transform: translateY(-8px);
+      }
     </style>
   </head>
   <body>
