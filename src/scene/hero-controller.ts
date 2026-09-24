@@ -271,11 +271,6 @@ export function mountHero(): void {
   }
 
   // --- Controls -------------------------------------------------------------
-  // The button only becomes real once the scene has finished arriving.
-  void loadComplete.then(() => {
-    button.hidden = false;
-  });
-  if (reduced) button.hidden = false;
   // Counted only when a failure actually starts; a click during a recovery is ignored by
   // the simulation and is not an event either.
   button.addEventListener('click', () => {
