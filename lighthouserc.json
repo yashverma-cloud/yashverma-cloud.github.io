@@ -2,9 +2,20 @@
   "ci": {
     "collect": {
       "staticDistDir": "./dist",
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/404.html",
+        "http://localhost/work/cloud-cost-optimisation/index.html",
+        "http://localhost/work/live-migration-to-kubernetes/index.html",
+        "http://localhost/work/alert-payload-reduction/index.html",
+        "http://localhost/work/karpenter-autoscaling/index.html",
+        "http://localhost/work/jarvis-slack-ops/index.html",
+        "http://localhost/work/sendmail-ses-cli/index.html"
+      ],
       "numberOfRuns": 3,
       "settings": {
-        "chromeFlags": "--no-sandbox --headless=new"
+        "chromeFlags": "--no-sandbox --headless=new",
+        "blockedUrlPatterns": ["*google-analytics.com*", "*analytics.google.com*"]
       }
     },
     "assert": {
