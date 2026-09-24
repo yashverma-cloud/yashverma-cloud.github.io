@@ -44,6 +44,7 @@ const { ingress, zones } = scene;
         <polygon class="plate" points={zone.plate} />
         {zone.nodes.map((node) => (
           <g class="node" data-node={node.id} data-pods={node.podsAtRest}>
+            <rect class="hit" x={node.hit.x} y={node.hit.y} width={node.hit.w} height={node.hit.h} />
             <polygon class="face-left" points={node.left} />
             <polygon class="face-right" points={node.right} />
             <polygon class="face-top" points={node.top} />
@@ -92,6 +93,11 @@ const { ingress, zones } = scene;
 
   .plate {
     stroke: var(--rule);
+  }
+
+  /* Painted, so it takes pointer events; transparent, so it is never seen. */
+  .hit {
+    fill: transparent;
   }
 
   .face-left,

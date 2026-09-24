@@ -112,12 +112,19 @@ export const scene = {
       const podSlots = POD_SLOT_OFFSETS.map(([dx, dy]) =>
         fmt(tilePoints(nx + dx, ny + dy, POD_H, NODE_Z + POD_Z)),
       );
+      // Invisible tap target: the node's own column of its plate. Nodes sit edge to edge,
+      // so the width cannot pass the node pitch without overlapping a neighbour, but the
+      // height can run the full plate — on a phone, ~58px instead of the box's ~25px.
+      const ground = project(nx, ny);
+      const pitch = 2 * (NODE_OFFSETS[1] - NODE_OFFSETS[0]) * KX;
+      const reach = 2 * PLATE_H * KY;
       return {
         /** Matches the simulation's node ids. */
         id: `${zone.id}-${slot}`,
         top: fmt(faces.top),
         left: fmt(faces.left),
         right: fmt(faces.right),
+        hit: { x: r(ground.x - pitch / 2), y: r(ground.y - reach), w: r(pitch), h: r(2 * reach) },
         podSlots,
         podsAtRest: zone.pods[slot] ?? 0,
       };
