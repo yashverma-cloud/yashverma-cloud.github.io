@@ -1,10 +1,4 @@
-# TEMPORARY — review deploy. The site is not finished and must not be indexed.
-# Restore the block below before going live. Tracked in REDESIGN_PLAN.md.
 User-agent: *
-Disallow: /
+Allow: /
 
-# Live version, restore on launch:
-# User-agent: *
-# Allow: /
-#
-# Sitemap: https://yashverma-cloud.github.io/sitemap-index.xml
+Sitemap: https://yashverma-cloud.github.io/sitemap-index.xml

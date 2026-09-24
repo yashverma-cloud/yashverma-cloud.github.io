@@ -4,7 +4,7 @@ import '../styles/tokens.css';
 import '../styles/base.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { SITE, SAME_AS, PREVIEW_NOINDEX } from '../consts';
+import { SITE, SAME_AS } from '../consts';
 import { NODE_COUNT } from '../scene/geometry';
 
 interface Props {
@@ -30,9 +30,6 @@ const {
 const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
 // Crawlers need absolute image URLs.
 const ogImageUrl = new URL(ogImage, Astro.site ?? SITE.url).href;
-
-// PREVIEW_NOINDEX is a temporary switch for review deploys — see consts.ts.
-const blockIndexing = noindex || PREVIEW_NOINDEX;
 
 const personLd = {
   '@context': 'https://schema.org',
@@ -66,7 +63,7 @@ const personLd = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {blockIndexing && <meta name="robots" content="noindex, nofollow" />}
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <link
       rel="preload"
@@ -120,7 +117,7 @@ const personLd = {
     <SiteFooter />
 
     {
-      !blockIndexing && (
+      !noindex && (
         <script is:inline define:vars={{ id: SITE.analyticsId }}>
           // Loaded after `load` so it never competes with rendering (CLAUDE.md).
           window.addEventListener('load', function () {
