@@ -19,7 +19,7 @@ export const SITE = {
   title: 'Yash Verma — cloud infrastructure engineer',
   description:
     'I keep production Kubernetes running when nodes die. Infrastructure Engineer, Cloud Operations at Copado, in Jaipur. Autoscaling, cost and observability across multi-region production infrastructure. Five years on AWS and GCP, at Treebo, BLG and now Copado.',
-  analyticsId: 'G-3800HFLG7R',
+  analyticsId: 'G-75ZS56MGG5',
 } as const;
 
 /** Assembled in the browser so no raw address appears in the HTML (CLAUDE.md). */
