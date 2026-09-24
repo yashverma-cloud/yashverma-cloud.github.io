@@ -86,6 +86,8 @@ const socials = links.filter((l) => l.data.kind === 'social');
       var done = function (ok) {
         btn.textContent = ok ? 'Copied' : address;
         if (status) status.textContent = ok ? 'Email address copied.' : address;
+        // The outcome only; the address itself is never sent to analytics.
+        if (window.__track) window.__track('copy_email', { result: ok ? 'copied' : 'shown' });
         window.setTimeout(function () {
           btn.textContent = btn.dataset.idle || 'Copy email';
         }, 2000);

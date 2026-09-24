@@ -8,6 +8,13 @@
 
 import { Simulation, type SimState } from './simulation';
 
+declare global {
+  interface Window {
+    /** Defined inline in Base.astro. Sends a GA4 event once analytics has loaded; otherwise a no-op. */
+    __track?: (name: string, params?: Record<string, string>) => void;
+  }
+}
+
 const ANNOUNCE_THROTTLE_MS = 2000;
 
 /**
@@ -269,12 +276,18 @@ export function mountHero(): void {
     button.hidden = false;
   });
   if (reduced) button.hidden = false;
-  button.addEventListener('click', () => sim.fail());
+  // Counted only when a failure actually starts; a click during a recovery is ignored by
+  // the simulation and is not an event either.
+  button.addEventListener('click', () => {
+    if (sim.fail()) window.__track?.('take_node_down', { method: 'button' });
+  });
 
   // Nodes are pointer targets; the button is the keyboard path. One control, not ten.
   poster.querySelectorAll<SVGGElement>('[data-node]').forEach((el) => {
     el.style.cursor = 'pointer';
-    el.addEventListener('click', () => sim.fail(el.dataset.node));
+    el.addEventListener('click', () => {
+      if (sim.fail(el.dataset.node)) window.__track?.('take_node_down', { method: 'node' });
+    });
   });
 
   // Chaos mode: opt-in, never auto-starts, and off under reduced motion.

@@ -101,6 +101,14 @@ const personLd = {
       set:html={JSON.stringify(personLd)}
       is:inline
     />
+
+    <script is:inline>
+      // Analytics events (take_node_down, copy_email). Does nothing until GA4 has loaded,
+      // and nothing at all when analytics is off, so callers never have to check.
+      window.__track = function (name, params) {
+        if (window.__gaReady && window.gtag) window.gtag('event', name, params || {});
+      };
+    </script>
   </head>
 
   <body>
@@ -121,11 +129,13 @@ const personLd = {
             s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
             document.head.appendChild(s);
             window.dataLayer = window.dataLayer || [];
-            function gtag() {
+            // Global, so window.__track can send events through it.
+            window.gtag = function () {
               window.dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', id);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', id);
+            window.__gaReady = true;
           });
         </script>
       )
