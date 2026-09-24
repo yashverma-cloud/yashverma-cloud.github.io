@@ -22,12 +22,12 @@
 
 - id: facebook-page
   label: 'Facebook'
-  url: 'https://www.facebook.com/profile.php?id=61593973846731'
+  url: 'https://www.facebook.com/yashverma.cloud'
   kind: social
   order: 4
 
 - id: linkedin-page
   label: 'LinkedIn page'
-  url: 'https://www.linkedin.com/company/145197666/'
+  url: 'https://www.linkedin.com/company/yashverma-cloud/'
   kind: social
   order: 5

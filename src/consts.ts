@@ -20,6 +20,6 @@ export const SAME_AS = [
   'https://www.linkedin.com/in/yashcloud/',
   'https://github.com/yashverma-cloud',
   'https://www.instagram.com/yashverma_cloud/',
-  'https://www.facebook.com/profile.php?id=61593973846731',
-  'https://www.linkedin.com/company/145197666/',
+  'https://www.facebook.com/yashverma.cloud',
+  'https://www.linkedin.com/company/yashverma-cloud/',
 ] as const;
