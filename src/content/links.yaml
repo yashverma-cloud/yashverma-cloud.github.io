@@ -31,3 +31,9 @@
   url: 'https://www.linkedin.com/company/yashverma-cloud/'
   kind: social
   order: 5
+
+- id: x
+  label: 'X (Twitter)'
+  url: 'https://x.com/yashvermmaa'
+  kind: social
+  order: 6

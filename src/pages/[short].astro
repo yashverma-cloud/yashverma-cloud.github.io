@@ -1,6 +1,6 @@
 ---
 /**
- * Bio short links: /in, /ig, /fb, /li-page. Each sends the visitor to the home page with
+ * Bio short links: /in, /ig, /fb, /li-page, /x, /threads. Each sends the visitor to the home page with
  * UTM tags, so GA4 can tell which profile they came from.
  *
  * Deliberately not built on Base: no analytics here (the landing page records the visit,
@@ -22,6 +22,8 @@ export const getStaticPaths = (() => {
     'li-page': { source: 'linkedin', content: 'company_page' },
     ig: { source: 'instagram' },
     fb: { source: 'facebook' },
+    x: { source: 'x' },
+    threads: { source: 'threads' },
   };
   return Object.entries(links).map(([short, link]) => ({ params: { short }, props: link }));
 }) satisfies GetStaticPaths;

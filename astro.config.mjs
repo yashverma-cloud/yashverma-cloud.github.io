@@ -11,7 +11,7 @@ export default defineConfig({
     sitemap({
       // Bio short links redirect and must stay out of the index.
       filter: (page) =>
-        !['/in', '/ig', '/fb', '/li-page'].includes(
+        !['/in', '/ig', '/fb', '/li-page', '/x', '/threads'].includes(
           new URL(page).pathname.replace(/\/$/, ''),
         ),
     }),
