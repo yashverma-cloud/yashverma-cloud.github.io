@@ -4,6 +4,8 @@ import '../styles/tokens.css';
 import '../styles/base.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { getImage } from 'astro:assets';
+import portrait from '../assets/yash.jpg';
 import { SITE, SAME_AS } from '../consts';
 import { NODE_COUNT } from '../scene/geometry';
 
@@ -31,11 +33,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
 // Crawlers need absolute image URLs.
 const ogImageUrl = new URL(ogImage, Astro.site ?? SITE.url).href;
 
+// The Contact portrait, as a plain JPEG Google can use for the person.
+const portraitJpg = await getImage({ src: portrait, width: 400, height: 400, format: 'jpg' });
+const personId = `${SITE.url}/#person`;
+
 const personLd = {
-  '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': personId,
   name: SITE.name,
   jobTitle: SITE.jobTitle,
+  description: `${SITE.jobTitle} at ${SITE.employer}, in ${SITE.location}. Autoscaling, cost and observability across multi-region production infrastructure on AWS and GCP.`,
+  image: new URL(portraitJpg.src, Astro.site ?? SITE.url).href,
   url: SITE.url,
   sameAs: [...SAME_AS],
   worksFor: { '@type': 'Organization', name: SITE.employer },
@@ -49,6 +57,20 @@ const personLd = {
     'Observability',
     'CI/CD',
   ],
+};
+
+// Google reads the site name from WebSite data on the home page only.
+const websiteLd = {
+  '@type': 'WebSite',
+  '@id': `${SITE.url}/#website`,
+  name: SITE.name,
+  alternateName: ['Yash Verma cloud', 'yashverma-cloud'],
+  url: `${SITE.url}/`,
+  about: { '@id': personId },
+};
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': Astro.url.pathname === '/' ? [websiteLd, personLd] : [personLd],
 };
 ---
 
@@ -96,7 +118,7 @@ const personLd = {
 
     <script
       type="application/ld+json"
-      set:html={JSON.stringify(personLd)}
+      set:html={JSON.stringify(structuredData)}
       is:inline
     />
 
