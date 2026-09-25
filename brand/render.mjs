@@ -2,7 +2,7 @@
  * Renders the brand kit to brand/export/ (not deployed, not committed).
  *
  *   npm run build                # once: writes dist/og/cluster.svg, which the covers use
- *   npm run brand                # the three covers and every card in cards.json
+ *   npm run brand                # every cover and every card in cards.json
  *   npm run brand -- --guides    # the same with safe-zone overlays, into export/guides/
  *   npm run brand -- --serve     # serve the templates on :4400 to edit them in a browser
  *
@@ -26,6 +26,7 @@ const COVERS = [
   { name: 'linkedin-profile-1584x396', page: 'covers/linkedin-profile.html', w: 1584, h: 396 },
   { name: 'linkedin-page-1512x256', page: 'covers/linkedin-page.html', w: 1512, h: 256 },
   { name: 'facebook-page-1640x924', page: 'covers/facebook-page.html', w: 1640, h: 924 },
+  { name: 'x-header-1500x500', page: 'covers/x-header.html', w: 1500, h: 500 },
 ];
 const CARD = { w: 1080, h: 1350, templates: ['diagram', 'insight', 'snippet'] };
 

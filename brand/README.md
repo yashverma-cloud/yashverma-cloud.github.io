@@ -21,6 +21,7 @@ a while; these change.
 | `linkedin-profile-1584x396.png` | 1584×396 | Centred 1350×220, ≥300px from the left (the profile photo covers the bottom-left, more on mobile) | [Linearity](https://www.linearity.io/blog/linkedin-size-guide/), [Snappa](https://snappa.com/blog/linkedin-banner-size/) |
 | `linkedin-page-1512x256.png` | 1512×256 | Centred, clear of the logo at the bottom-left | [LinkedIn Help](https://www.linkedin.com/help/linkedin/answer/a563309/image-specifications-for-your-linkedin-pages-and-career-pages) (older guides still say 1128×191) |
 | `facebook-page-1640x924.png` | 1640×924 (16:9) | The 2.4:1 band a phone keeps, clear of the profile picture | [Facebook Help](https://www.facebook.com/help/125379114252045): 16:9 on computers, 2.4:1 on phones |
+| `x-header-1500x500.png` | 1500×500 (3:1) | Centred 1500×360 band (phones trim the top and bottom), clear of the profile picture at the bottom-left | [Snappa](https://snappa.com/blog/twitter-header-size/), [Krumzi](https://www.krumzi.com/size-guide/twitter-header-size) |
 | `card-*.png` | 1080×1350 (4:5) | Whole card; no text under 36px, since the feed shows it at a third to half size | — |
 
 After uploading the Facebook cover, check it on a phone: the new layout is recent and
