@@ -12,7 +12,7 @@ export const SITE = {
     'I keep production Kubernetes running when nodes die. Infrastructure Engineer, Cloud Operations at Copado, in Jaipur. Autoscaling, cost and observability across multi-region production infrastructure. Five years on AWS and GCP, at Treebo, BLG and now Copado.',
   analyticsId: 'G-75ZS56MGG5',
   /** Attribution on X link cards (twitter:site). */
-  xHandle: '@yashvermmaa',
+  xHandle: '@yashverma_cloud',
 } as const;
 
 /** Assembled in the browser so no raw address appears in the HTML (CLAUDE.md). */
@@ -24,7 +24,7 @@ export const SAME_AS = [
   'https://www.instagram.com/yashverma_cloud/',
   'https://www.facebook.com/yashverma.cloud',
   'https://www.linkedin.com/company/yashverma-cloud/',
-  'https://x.com/yashvermmaa',
+  'https://x.com/yashverma_cloud',
   // Identity only: Threads mirrors Instagram, so it is not a visible link on the site.
   'https://www.threads.com/@yashverma_cloud',
 ] as const;
