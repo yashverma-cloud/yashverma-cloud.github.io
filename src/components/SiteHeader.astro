@@ -1,13 +1,22 @@
 ---
+import { getCollection } from 'astro:content';
+
 // Thin sticky bar, 52px (design/notes.md §5.1). Sentence case, no ALL-CAPS.
-// "Writing" joins this nav when the first post ships.
 //
 // `narrow` marks the items that survive at phone widths. Work stays because it is the
 // route to the proof, and phones are where most of the site's traffic lands — hiding it
 // there optimised the bar for tidiness over the page's actual job.
+//
+// "Writing" appears only once a post is published (design/notes.md §8), and the data is the
+// gate — no flag to remember. It sits before Contact rather than after it: Contact is where
+// the page is meant to end. It is `narrow: false` because a fourth item is what would
+// crowd the bar at 360px, and it is the one item that is not part of the 10-second job.
+const published = await getCollection('writing', ({ data }) => !data.draft);
+
 const nav = [
   { label: 'Work', href: '/#work', narrow: true },
   { label: 'Experience', href: '/#experience', narrow: false },
+  ...(published.length > 0 ? [{ label: 'Writing', href: '/writing', narrow: false }] : []),
   { label: 'Contact', href: '/#contact', narrow: true },
 ];
 ---

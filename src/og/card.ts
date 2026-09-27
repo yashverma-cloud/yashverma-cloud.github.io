@@ -204,6 +204,65 @@ export function caseStudyCard({ title, mechanism }: CaseStudyCard): El {
   );
 }
 
+export interface PostCard {
+  title: string;
+  description: string;
+}
+
+/**
+ * The writing card: the case-study card's composition with its own eyebrow, so the two read
+ * as one family. The rule under the eyebrow keeps the case study's 220px width even though
+ * "Writing" is a shorter word — the length of that line is the family resemblance.
+ *
+ * The title size steps down for long titles. Case-study titles were written in this repo and
+ * curated to fit; post titles arrive from outside it, and Satori does not shrink text to fit,
+ * so an unclamped 62px title would run out of the sheet instead of wrapping inside it.
+ */
+export function postCard({ title, description }: PostCard): El {
+  return sheet(
+    div(
+      {
+        position: 'absolute',
+        left: 56,
+        right: 56,
+        top: 56,
+        bottom: 120,
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      div(
+        {
+          fontSize: 22,
+          fontWeight: 600,
+          color: T.muted,
+          paddingBottom: 12,
+          marginBottom: 30,
+          borderBottom: `1px solid ${RULE_FAINT}`,
+          width: 220,
+        },
+        'Writing',
+      ),
+      div(
+        {
+          fontSize: title.length > 52 ? 52 : 62,
+          fontWeight: 700,
+          lineHeight: 1.08,
+          letterSpacing: -0.93,
+          color: T.line,
+          maxWidth: 940,
+          textWrap: 'balance',
+        },
+        title,
+      ),
+      div(
+        { marginTop: 34, fontSize: 30, color: T.muted, maxWidth: 940, textWrap: 'balance' },
+        description,
+      ),
+    ),
+    titleBlock(),
+  );
+}
+
 // --- Render ------------------------------------------------------------------------
 
 export async function renderPng(card: El): Promise<Buffer> {

@@ -18,6 +18,12 @@ interface Props {
   ogImage?: string;
   ogImageAlt?: string;
   ogType?: 'website' | 'article';
+  /**
+   * One extra node appended to this page's JSON-LD graph — a BlogPosting, for instance.
+   * Kept here rather than as a second inline script per page, so there is one `@context`
+   * and one place that emits structured data.
+   */
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
@@ -27,6 +33,7 @@ const {
   ogImage = '/og/default.png',
   ogImageAlt = `Blueprint drawing of a ${NODE_COUNT}-node Kubernetes cluster beside the line “I keep production Kubernetes running when nodes die.” ${SITE.name}, ${SITE.jobTitle}.`,
   ogType = 'website',
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
@@ -70,7 +77,10 @@ const websiteLd = {
 };
 const structuredData = {
   '@context': 'https://schema.org',
-  '@graph': Astro.url.pathname === '/' ? [websiteLd, personLd] : [personLd],
+  '@graph': [
+    ...(Astro.url.pathname === '/' ? [websiteLd, personLd] : [personLd]),
+    ...(jsonLd ? [jsonLd] : []),
+  ],
 };
 ---
 

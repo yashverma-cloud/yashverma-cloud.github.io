@@ -1,2 +1,2 @@
-# The `writing` collection is built but stays empty until the first post exists
-# (CLAUDE.md). It is unlinked and out of the nav until then.
+# The `writing` collection. `_contract.md` in this folder is the frontmatter and content
+# contract for a post; the section's code is in `src/pages/writing/`.
