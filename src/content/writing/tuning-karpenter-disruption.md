@@ -2,7 +2,7 @@
 title: 'Installing Karpenter was the short part'
 description: 'Karpenter now gives a pending pod a ready node in about 80 seconds. Installing it was quick; most of the work was teaching it what not to move.'
 published: '2026-09-27'
-draft: false
+draft: true
 ---
 
 I took Karpenter from a proof of concept through to every production environment, and retired
