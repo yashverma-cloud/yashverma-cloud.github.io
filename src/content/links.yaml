@@ -1,6 +1,12 @@
 # Exactly the public links listed in CLAUDE.md. No phone number, no resume link.
 # Email is deliberately absent: it is assembled in JS behind a copy button, never a
 # raw mailto: in the HTML.
+#
+# 27 Sep 2026: cut to LinkedIn, GitHub and email. The LinkedIn page was deleted — two
+# identities for one person on one platform works against both — and Instagram, Facebook and
+# X came off the site with it. Those accounts stay open and keep the site's URL in their bios,
+# so they still bring people here; the traffic runs inward only. They remain in `SAME_AS`
+# (src/consts.ts) as identity, which is not a visible link.
 
 - id: linkedin
   label: 'LinkedIn'
@@ -13,27 +19,3 @@
   url: 'https://github.com/yashverma-cloud'
   kind: social
   order: 2
-
-- id: instagram
-  label: 'Instagram'
-  url: 'https://www.instagram.com/yashverma_cloud/'
-  kind: social
-  order: 3
-
-- id: facebook-page
-  label: 'Facebook'
-  url: 'https://www.facebook.com/yashverma.cloud'
-  kind: social
-  order: 4
-
-- id: linkedin-page
-  label: 'LinkedIn page'
-  url: 'https://www.linkedin.com/company/yashverma-cloud/'
-  kind: social
-  order: 5
-
-- id: x
-  label: 'X (Twitter)'
-  url: 'https://x.com/yashverma_cloud'
-  kind: social
-  order: 6

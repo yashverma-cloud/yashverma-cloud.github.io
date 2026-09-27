@@ -1,7 +1,12 @@
 ---
 /**
- * Bio short links: /in, /ig, /fb, /li-page, /x, /threads. Each sends the visitor to the home page with
+ * Bio short links: /in, /ig, /fb, /x, /threads. Each sends the visitor to the home page with
  * UTM tags, so GA4 can tell which profile they came from.
+ *
+ * These outlive the links in the site's own footer. The site links out to LinkedIn, GitHub and
+ * email only (27 Sep 2026), but Instagram, Facebook, X and Threads still carry the site's URL in
+ * their bios, so their short links stay: the traffic runs inward. `/li-page` was removed with the
+ * LinkedIn company page it lived on.
  *
  * Deliberately not built on Base: no analytics here (the landing page records the visit,
  * with the tags), `noindex`, and nothing to render. The redirect is a meta refresh, which
@@ -19,7 +24,6 @@ import { SITE } from '../consts';
 export const getStaticPaths = (() => {
   const links: Record<string, { source: string; content?: string }> = {
     in: { source: 'linkedin', content: 'profile' },
-    'li-page': { source: 'linkedin', content: 'company_page' },
     ig: { source: 'instagram' },
     fb: { source: 'facebook' },
     x: { source: 'x' },
