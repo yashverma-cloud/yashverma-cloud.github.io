@@ -20,12 +20,8 @@ export const EMAIL_PARTS = ['yashverma.cloud', 'gmail.com'] as const;
 
 /**
  * Every profile that is the same person, for JSON-LD `sameAs`. Not the site's visible links:
- * those are LinkedIn, GitHub and email only (src/content/links.yaml).
- *
- * The LinkedIn company page was deleted on 27 Sep 2026 and is gone from here too — a dead URL
- * in `sameAs` is worse than a missing one. The four below stay: the accounts are still open and
- * still carry the site's URL, so they corroborate the identity for search engines even though
- * the site no longer links out to them.
+ * those are LinkedIn, GitHub and email only (src/content/links.yaml). List only accounts that
+ * still exist: a dead URL here is worse than a missing one.
  */
 export const SAME_AS = [
   'https://www.linkedin.com/in/yashcloud/',

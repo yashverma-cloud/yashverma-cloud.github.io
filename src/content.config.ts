@@ -71,7 +71,7 @@ const links = defineCollection({
   schema: z.object({
     id: z.string(),
     label: z.string(),
-    url: z.string().url(),
+    url: z.url(),
     /** 'primary' renders as the one filled button on the site. */
     kind: z.enum(['primary', 'secondary', 'social']),
     order: z.number(),
@@ -79,8 +79,9 @@ const links = defineCollection({
 });
 
 /**
- * Hidden until the first entry exists (CLAUDE.md): with nothing published there is no page, no
- * card and no nav item. `_`-prefixed files are excluded because the content-layer loader, unlike
+ * The section is parked (README.md, "Parked: /writing"), so nothing here reaches the site. When
+ * it is restored, nothing published still means no page, no card and no nav item.
+ * `_`-prefixed files are excluded because the content-layer loader, unlike
  * page routing, does not skip them on its own — `_contract.md` lives in that folder as the brief
  * for whoever writes the posts, and without this it would be read as a post and fail the schema.
  */
