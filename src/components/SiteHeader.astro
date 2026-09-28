@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { getCollection } from 'astro:content';
 
 // Thin sticky bar, 52px (design/notes.md §5.1). Sentence case, no ALL-CAPS.
@@ -7,11 +9,14 @@ import { getCollection } from 'astro:content';
 // route to the proof, and phones are where most of the site's traffic lands — hiding it
 // there optimised the bar for tidiness over the page's actual job.
 //
-// "Writing" appears only once a post is published (design/notes.md §8), and the data is the
-// gate — no flag to remember. It sits before Contact rather than after it: Contact is where
-// the page is meant to end. It is `narrow: false` because a fourth item is what would
-// crowd the bar at 360px, and it is the one item that is not part of the 10-second job.
-const published = await getCollection('writing', ({ data }) => !data.draft);
+// "Writing" needs two things: the section's routes must be built, and a post must be
+// published. The section is parked by renaming its route folder to `src/pages/_writing`,
+// which Astro does not build (README, "Parked: /writing"). Checking for the routed folder
+// means a post published while the section is parked cannot put a link to a missing page
+// in the nav. It sits before Contact, which is where the page is meant to end, and is
+// `narrow: false` because a fourth item is what would crowd the bar at 360px.
+const routed = existsSync(join(process.cwd(), 'src/pages/writing'));
+const published = routed ? await getCollection('writing', ({ data }) => !data.draft) : [];
 
 const nav = [
   { label: 'Work', href: '/#work', narrow: true },

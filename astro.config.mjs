@@ -10,13 +10,8 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Bio short links redirect and must stay out of the index.
-      //
-      // `/writing` is here while the section is paused (27 Sep 2026): with no published post it
-      // renders `noindex`, and a noindex URL sitting in the sitemap is exactly what Search Console
-      // reports as an error. **Remove '/writing' from this list when posts return** — the page
-      // drops its own `noindex` automatically, but this line will not.
       filter: (page) =>
-        !['/in', '/ig', '/fb', '/x', '/threads', '/writing'].includes(
+        !['/in', '/ig', '/fb', '/x', '/threads'].includes(
           new URL(page).pathname.replace(/\/$/, ''),
         ),
     }),

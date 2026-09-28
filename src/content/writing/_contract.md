@@ -1,7 +1,11 @@
 # Writing — what a post file must contain
 
 Underscore-prefixed, so the collection loader ignores this file. It is the contract for whoever
-writes the posts; the section's code is in `src/pages/writing/` and `src/og/card.ts`.
+writes the posts; the section's code is in `src/pages/_writing/` and `src/og/card.ts`.
+
+**Status: parked.** The section is switched off — nothing in this folder appears on the site,
+whatever its `draft` value. Posts can still be drafted here. Bringing the section back is
+covered in README.md, "Parked: /writing".
 
 ## Frontmatter
 
