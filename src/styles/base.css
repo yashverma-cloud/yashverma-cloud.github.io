@@ -21,6 +21,8 @@ html {
 
 body {
   min-height: 100svh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--blueprint);
   color: var(--line);
   font-family: var(--font-sans);
@@ -174,6 +176,13 @@ a:hover {
 }
 
 /* --- Layout ----------------------------------------------------------- */
+
+/* With body a column, main takes the slack, so on a page shorter than the viewport — the 404
+   above all — the footer sits at the bottom instead of ending mid-screen over a band of page
+   ground. Long pages are unaffected: there is no slack to take. */
+main {
+  flex: 1 0 auto;
+}
 
 .wrap {
   width: 100%;
